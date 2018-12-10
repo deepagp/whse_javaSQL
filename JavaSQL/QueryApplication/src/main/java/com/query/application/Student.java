@@ -1,0 +1,42 @@
+package com.query.application;
+
+public class Student {
+
+	private int id;
+	private String fristName;
+	private String lastName;
+	private int age;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getFristName() {
+		return fristName;
+	}
+
+	public void setFristName(String fristName) {
+		this.fristName = fristName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+}
