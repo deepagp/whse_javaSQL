@@ -24,13 +24,13 @@ public class QueryApplication {
 			System.out.println("Creating statement...");
 			stmt = conn.createStatement();
 			
-			String sql = getStudentsQuery();
+			String sql = getPOAssignmentsQuery();
 
 		    rs = stmt.executeQuery(sql);
 
-			List<Student> studentList = getStudentRecords(rs);
+			List<UserPOAssignment> assignmentList = getUserPoAssignments(rs);
 
-			printStudentRecords(studentList);
+			printUserPOAssignments(assignmentList);
 
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -55,17 +55,19 @@ public class QueryApplication {
 	}
 
 	/**
-	 * Print student records
+	 * Print User PO Assignments
 	 * 
-	 * @param studentList
+	 * @param assignmentList
 	 */
-	private static void printStudentRecords(List<Student> studentList) {
+	private static void printUserPOAssignments(List<UserPOAssignment> assignmentList) {
 
-		for (Student student : studentList) {
-			System.out.print("ID: " + student.getId());
-			System.out.print(", Age: " + student.getAge());
-			System.out.print(", First Name: " + student.getFristName());
-			System.out.println(", Last Name: " + student.getLastName());
+		if(assignmentList == null)
+			return;
+		
+		for (UserPOAssignment assignment : assignmentList) {
+			System.out.print(" userId: " + assignment.getUserId());
+			System.out.print(" Po Number: " + assignment.getPoNumber());
+			System.out.print(" Status: " + assignment.getStatus());
 		}
 
 	}
@@ -84,47 +86,36 @@ public class QueryApplication {
 	 * 
 	 * @return
 	 */
-	private static String getStudentsQuery() {
+	private static String getPOAssignmentsQuery() {
 		StringBuilder sql = new StringBuilder();
 
-		sql.append("SELECT id, firstName, lastName, age FROM Employees");
-		sql.append(getCriteria());
+		sql.append("SELECT user_id, po_num, status FROM User_PO_Assignment");
 
 		return sql.toString();
 
 	}
 
 	/**
-	 * Build condition
-	 * 
-	 * @return
-	 */
-	private static String getCriteria() {
-		return " WHERE age < 30";
-	}
-
-	/**
-	 * Fetch student records
+	 * Fetch User PO Assignments
 	 * 
 	 * @param rs
 	 * @return
 	 * @throws SQLException
 	 */
-	private static List<Student> getStudentRecords(ResultSet rs) throws SQLException {
+	private static List<UserPOAssignment> getUserPoAssignments(ResultSet rs) throws SQLException {
 
-		List<Student> students = new ArrayList<Student>();
-		Student student;
+		List<UserPOAssignment> assignments = new ArrayList<UserPOAssignment>();
+		UserPOAssignment assignment;
 		while (rs.next()) {
-			student = new Student();
-			student.setId(rs.getInt("id"));
-			student.setAge(rs.getInt("age"));
-			student.setFristName(rs.getString("firstName"));
-			student.setLastName(rs.getString("lastName"));
+			assignment = new UserPOAssignment();
+			assignment.setUserId(rs.getInt("user_id"));
+			assignment.setPoNumber(rs.getInt("po_num"));
+			assignment.setStatus(rs.getString("status"));
 
-			students.add(student);
+			assignments.add(assignment);
 		}
 
-		return students;
+		return assignments;
 
 	}
 

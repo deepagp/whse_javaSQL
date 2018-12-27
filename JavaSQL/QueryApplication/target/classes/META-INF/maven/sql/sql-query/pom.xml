@@ -3,13 +3,13 @@
   <groupId>sql</groupId>
   <artifactId>sql-query</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <build>
-    <dependencies>
-	  <dependency>
-	    <groupId>mysql</groupId>
-	    <artifactId>mysql-connector-java</artifactId>
-	    <version>5.1.39</version>
-	  </dependency>
-    </dependencies>
-  </build>	
+<build>  
+  	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.39</version>
+		</dependency>
+	</dependencies>
+</build>	
 </project>
